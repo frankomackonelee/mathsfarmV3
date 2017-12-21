@@ -18,7 +18,10 @@
     <script src="./js/question_selector.js"></script>
     <!-- end for selector -->
 
-    <style>body { font-size: 1.3em; }</style>
+    <style>
+      body { font-size: 1.3em; }
+      .green {color: green;}
+    </style>
     <title>Name Calculator</title>
   </head>
   <body>
@@ -62,11 +65,11 @@
 
   <!-- start of question selector -->
   <div class="container" ng-app="quesion_selector_app">
-    <div ng-controller="QSController">
+    <div>
 
       <h2><a href="#questionSpecs" data-toggle="collapse">Choose Questions</a></h2>
 
-      <div class="form-group collapse in" id="questionSpecs" >
+      <div class="form-group collapse in" id="questionSpecs" ng-controller="QSController">
 
         <div class="row">
           <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
@@ -104,13 +107,20 @@
 
       </div>
 
-      <div class="row">
-          <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">Question</div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">Answer</div>
-      </div>
-      <div class="row" ng-repeat="qanda in qandas">
-          <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">{{qanda.question}}</div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">{{qanda.answer}}</div>
-      </div>
-
+      <div ng-controller='PageController'>
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"  style="padding: 8px 16px;">Question</div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 8px 16px;">Answer</div>
+        </div>
+        <div class="row" ng-repeat="qanda in qandas()">
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"  style="padding: 8px 16px;">{{qanda.question}}</div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" ng-click="clickResponse($index)">
+              <span ng-if="visible($index)">{{qanda.answer}}</span>
+              <span ng-if="invisible($index)">
+                <button class="btn btn-default btn-block">Answer {{$index + 1}}</button>
+              </span>
+            </div>
+        </div>
+    </div>
     </div>
 
   </div>

@@ -107,15 +107,15 @@
 
       </div>
 
-      <div ng-controller='PageController'>
+      <div ng-controller='PageController as pc'>
         <div class="row">
             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"  style="padding: 8px 16px;">Question</div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 8px 16px;">Answer</div>
         </div>
-        <div class="row" ng-repeat="qanda in qandas()">
+        <div class="row" ng-repeat="qanda in pc.qandas()">
             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"  style="padding: 8px 16px;">{{qanda.question}}</div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" ng-click="clickResponse($index)">
-              <span ng-if="visible($index)">{{qanda.answer}}</span>
-              <span ng-if="invisible($index)">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" ng-click="pc.clickResponse($index)">
+              <span ng-if="pc.visible($index)">{{qanda.answer}}</span>
+              <span ng-if="pc.invisible($index)">
                 <button class="btn btn-default btn-block">Answer {{$index + 1}}</button>
               </span>
             </div>

@@ -64,28 +64,30 @@ function QSController($scope, sharedProperties){
 
 PageController.$inject['$scope','sharedProperties']
 function PageController($scope, sharedProperties){
-  $scope.visibility = [];
+  var pc = this;
+
+  pc.visibility = [];
 
   var fillVisibility = function(fillTo){
-    for(var i = $scope.visibility.length; i<fillTo; i++){
-      $scope.visibility.push(false);
+    for(var i = pc.visibility.length; i<fillTo; i++){
+      pc.visibility.push(false);
     }
   };
 
-  $scope.clickResponse = function(int){
-    if(int > $scope.length){
+  pc.clickResponse = function(int){
+    if(int > pc.length){
       fillVisibility(int);
     }
-    $scope.visibility[int] = !$scope.visibility[int];
+    pc.visibility[int] = !pc.visibility[int];
   }
-  $scope.visible = function(int){
-    return $scope.visibility[int];
+  pc.visible = function(int){
+    return pc.visibility[int];
   }
-  $scope.invisible = function(int){
-    return !$scope.visible(int);
+  pc.invisible = function(int){
+    return !pc.visible(int);
   }
 
-  $scope.qandas = function(){
+  pc.qandas = function(){
     return sharedProperties.getProperty();
   }
 

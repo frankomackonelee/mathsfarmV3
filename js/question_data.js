@@ -27,7 +27,7 @@ var subtopics_and_titles = {
           },
           {
             parent:"Decimals*",
-            children:["Adding and subtracting decimals*","Dividing decimals"],
+            children:["Adding and subtracting decimals","Dividing decimals*"],
           },
           {
             parent:"Equations*",

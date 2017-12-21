@@ -5,17 +5,7 @@
 
 angular.module('quesion_selector_app', [])
 
-.service('sharedProperties', function () {
-  var property = [];
-    return {
-        getProperty: function () {
-            return property;
-        },
-        setProperty: function(value) {
-            property = value;
-        }
-    };
-})
+.service('sharedProperties', sharedProperties)
 
 .controller('QSController', QSController)
 
@@ -58,41 +48,68 @@ function QSController(sharedProperties){
 
   qs.titleChange = function(){
     console.log("Changing titles");
-    sharedProperties.setProperty( returnRelevantArray(titles_and_questions,qs.selectedTitle) );
+    sharedProperties.setqAndAArray( returnRelevantArray(titles_and_questions,qs.selectedTitle) );
     console.log("Questions Have Changed");
   };
 
 }
 
-PageController.$inject['sharedProperties']
+PageController.$inject['sharedProperties'];
 function PageController(sharedProperties){
   var pc = this;
 
-  pc.visibility = [];
-
-  var fillVisibility = function(fillTo){
-    for(var i = pc.visibility.length; i<fillTo; i++){
-      pc.visibility.push(false);
-    }
-  };
-
   pc.clickResponse = function(int){
-    if(int > pc.length){
-      fillVisibility(int);
-    }
-    pc.visibility[int] = !pc.visibility[int];
+    sharedProperties.changeVisibiliity(int);
   }
+
   pc.visible = function(int){
-    return pc.visibility[int];
-  }
-  pc.invisible = function(int){
-    return !pc.visible(int);
+    return sharedProperties.isVisible(int);
   }
 
-  pc.qandas = function(){
-    return sharedProperties.getProperty();
+  pc.qandas = sharedProperties.getqAndAArray;
+
+  pc.mouseoverQuestion = function(int){
+    if(sharedProperties.isVisible(int)){
+      pc.EmphasiseClass = int;
+    }
   }
 
+  pc.mouseoutQuestion = function(){
+    pc.EmphasiseClass = null;
+  }
+
+  pc.GetEmphasis = function(int){
+    if(int == pc.EmphasiseClass){
+      return "bg-info";
+    }else{
+      return "";
+    }
+  }
+}
+
+function sharedProperties() {
+  var service = this;
+  var qAndAArray = [];
+  var visibilityArray = [];
+
+  service.getqAndAArray = function () {
+      return qAndAArray;
+  }
+
+  service.setqAndAArray = function(value) {
+      qAndAArray = value;
+      for(var i = 0; i<qAndAArray.length; i++){
+        visibilityArray[i] = false;
+      }
+  }
+
+  service.isVisible = function(int){
+    return visibilityArray[int];
+  }
+
+  service.changeVisibiliity = function(int){
+    visibilityArray[int] = !visibilityArray[int];
+  }
 }
 
 })();

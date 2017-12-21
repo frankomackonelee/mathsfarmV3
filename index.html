@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width = device-width, initial-scale = 1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="./css/common_styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- end for bootstrap-->
@@ -109,16 +110,33 @@
 
       <div ng-controller='PageController as pc'>
         <div class="row">
-            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"  style="padding: 8px 16px;">Question</div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 8px 16px;">Answer</div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">Question</div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">Answer</div>
         </div>
         <div class="row" ng-repeat="qanda in pc.qandas()">
-            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"  style="padding: 8px 16px;">{{qanda.question}}</div>
+
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+              <button class="btn btn-default btn-block" ng-mouseover="pc.mouseoverQuestion($index)" ng-mouseleave="pc.mouseoutQuestion()">
+                <span class="{{pc.GetEmphasis($index)}}">
+                  {{qanda.question}}
+                </span>
+              </button>
+            </div>
+
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" ng-click="pc.clickResponse($index)">
-              <span ng-if="pc.visible($index)">{{qanda.answer}}</span>
-              <span ng-if="pc.invisible($index)">
-                <button class="btn btn-default btn-block">Answer {{$index + 1}}</button>
+              <span ng-show="pc.visible($index)">
+                <button class="btn btn-default btn-block" ng-mouseover="pc.mouseoverQuestion($index)" ng-mouseleave="pc.mouseoutQuestion()">
+                  <span class="{{pc.GetEmphasis($index)}}">
+                    {{qanda.answer}}
+                  </span>
+                </button>
+              </span>
+              <span ng-hide="pc.visible($index)">
+                <button class="btn btn-success btn-block">
+                  <span>Answer {{$index + 1}}</span>
+                </button>
               </span>
             </div>
+
         </div>
     </div>
     </div>

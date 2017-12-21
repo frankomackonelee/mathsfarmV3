@@ -21,16 +21,18 @@ angular.module('quesion_selector_app', [])
 
 .controller('PageController', PageController);
 
-QSController.$inject = ['$scope', 'sharedProperties']
-function QSController($scope, sharedProperties){
+QSController.$inject = ['sharedProperties']
+function QSController(sharedProperties){
+  var qs = this;
+
   var topics = [];
   for(var i = 0; i<topics_and_subtopics.data.length;i++){
     topics.push(topics_and_subtopics.data[i].parent);
   }
-  $scope.topics = topics;
-  $scope.selectedTopic = "NotSelected";
-  $scope.selectedSubtopic = "NotSelected";
-  $scope.selectedTitle = "NotSelected";
+  qs.topics = topics;
+  qs.selectedTopic = "NotSelected";
+  qs.selectedSubtopic = "NotSelected";
+  qs.selectedTitle = "NotSelected";
 
   var returnRelevantArray = function(unfilteredObj, selectedValue){
     for(var i = 0; i<unfilteredObj.data.length; i++){
@@ -40,30 +42,30 @@ function QSController($scope, sharedProperties){
     }
   };
 
-  $scope.topicChange = function(){
+  qs.topicChange = function(){
     console.log("Changed topic");
-    $scope.subtopics = returnRelevantArray(topics_and_subtopics,$scope.selectedTopic);
-    $scope.selectedSubtopic = "NotSelected"
+    qs.subtopics = returnRelevantArray(topics_and_subtopics,qs.selectedTopic);
+    qs.selectedSubtopic = "NotSelected"
     console.log("Subtopics have been changed");
   };
 
-  $scope.subtopicChange = function(){
+  qs.subtopicChange = function(){
     console.log("Changing subtopic");
-    $scope.titles = returnRelevantArray(subtopics_and_titles,$scope.selectedSubtopic);
-    $scope.selectedTitle = "NotSelected"
+    qs.titles = returnRelevantArray(subtopics_and_titles,qs.selectedSubtopic);
+    qs.selectedTitle = "NotSelected"
     console.log("Titles have been changed");
   };
 
-  $scope.titleChange = function(){
+  qs.titleChange = function(){
     console.log("Changing titles");
-    sharedProperties.setProperty( returnRelevantArray(titles_and_questions,$scope.selectedTitle) );
+    sharedProperties.setProperty( returnRelevantArray(titles_and_questions,qs.selectedTitle) );
     console.log("Questions Have Changed");
   };
 
 }
 
-PageController.$inject['$scope','sharedProperties']
-function PageController($scope, sharedProperties){
+PageController.$inject['sharedProperties']
+function PageController(sharedProperties){
   var pc = this;
 
   pc.visibility = [];

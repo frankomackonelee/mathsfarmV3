@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="quesion_selector_app">
   <head>
     <meta charset="utf-8">
     <!-- for bootstrap -->
@@ -19,94 +19,18 @@
     <script src="./js/question_selector.js"></script>
     <!-- end for selector -->
 
-    <style>
-      body { font-size: 1.3em; }
-      .green {color: green;}
-    </style>
-    <title>Name Calculator</title>
+    <title>Maths Farm</title>
   </head>
-  <body>
-    <!-- start of navbar -->
-  <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <!-- logo -->
-    <div class="navbar-header">
-      <a href="#" class="navbar-brand"><img src="favicon-transparent-white.png" height=20 width=20></a>
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
 
-    <!-- pages -->
-    <div class="collapse navbar-collapse" id="mainNavBar">
-      <ul class="nav navbar-nav">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Contacts</a></li>
-        <li class="active"><a href="#">Choose Questions</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Questions</a></li>
-            <li><a href="#">Catch Phrase</a></li>
-            <li><a href="#">Bingo</a></li>
-            <li><a href="#">Find the phrase</a></li>
-          </ul>
-        </li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Logout</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<!-- end of navbar -->
+  <!-- menu bar at the top -->
+  <top-menu-bar></top-menu-bar>
 
   <!-- start of question selector -->
-  <div class="container" ng-app="quesion_selector_app">
+  <div class="container">
     <div>
 
-      <h2><a href="#questionSpecs" data-toggle="collapse">Choose Questions</a></h2>
-
-      <div class="form-group collapse in" id="questionSpecs" ng-controller="QSController as qs">
-
-        <div class="row">
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
-              <label for="levels">Choose Difficulty:</label>
-              <select class="form-control" id="levels">
-                    <option value="NotSelected"></option>
-              </select>
-          </div>
-
-          <div class="col-lg-3 col-md-3 col-sm-8 col-xs-8">
-              <label for="topics">Choose Topic:</label>
-              <select id="topics" class="form-control" ng-model="qs.selectedTopic" ng-change="qs.topicChange()">
-                    <option value="NotSelected"></option>
-                    <option ng-repeat="topic in qs.topics" value="{{topic}}">{{topic}}</option>
-              </select>
-          </div>
-
-          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-              <label for="subtopics">Choose Subtopic:</label>
-              <select class="form-control" id="subtopics" ng-model="qs.selectedSubtopic" ng-change="qs.subtopicChange()">
-                    <option value="NotSelected"></option>
-                    <option ng-repeat="subtopic in qs.subtopics" value="{{subtopic}}">{{subtopic}}</option>
-              </select>
-          </div>
-
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <label for="titles">Choose Title:</label>
-              <select class="form-control" id="titles" ng-model="qs.selectedTitle" ng-change="qs.titleChange()">
-                    <option value="NotSelected"></option>
-                    <option ng-repeat="title in qs.titles" value="{{title}}">{{title}}</option>
-              </select>
-          </div>
-
-        </div>
-
-      </div>
+      <!-- question selection -->
+      <question-selection></question-selection>
 
       <div ng-controller='PageController as pc'>
         <div class="row">

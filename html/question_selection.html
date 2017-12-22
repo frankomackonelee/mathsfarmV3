@@ -1,0 +1,39 @@
+<h2><a href="#questionSpecs" data-toggle="collapse">Choose Questions</a></h2>
+
+<div class="form-group collapse in" id="questionSpecs" ng-controller="QSController as qs">
+
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+        <label for="levels">Choose Difficulty:</label>
+        <select class="form-control" id="levels">
+              <option value="NotSelected"></option>
+        </select>
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-8 col-xs-8">
+        <label for="topics">Choose Topic:</label>
+        <select id="topics" class="form-control" ng-model="qs.selectedTopic" ng-change="qs.topicChange()">
+              <option value="NotSelected"></option>
+              <option ng-repeat="topic in qs.topics" value="{{topic}}">{{topic}}</option>
+        </select>
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <label for="subtopics">Choose Subtopic:</label>
+        <select class="form-control" id="subtopics" ng-model="qs.selectedSubtopic" ng-change="qs.subtopicChange()">
+              <option value="NotSelected"></option>
+              <option ng-repeat="subtopic in qs.subtopics" value="{{subtopic}}">{{subtopic}}</option>
+        </select>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <label for="titles">Choose Title:</label>
+        <select class="form-control" id="titles" ng-model="qs.selectedTitle" ng-change="qs.titleChange()">
+              <option value="NotSelected"></option>
+              <option ng-repeat="title in qs.titles" value="{{title}}">{{title}}</option>
+        </select>
+    </div>
+
+  </div>
+
+</div>

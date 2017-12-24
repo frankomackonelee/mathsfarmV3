@@ -21,56 +21,33 @@
 
     <title>Maths Farm</title>
   </head>
-
+  <body>
   <!-- menu bar at the top -->
-  <top-menu-bar></top-menu-bar>
+  <home-nav-directive></home-nav-directive>
 
   <!-- start of question selector -->
   <div class="container">
-    <div>
+    <div class="row">
 
-      <!-- question selection -->
-      <question-selection></question-selection>
-
-      <div ng-controller='PageController as pc'>
-        <div class="row">
-            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">Question</div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">Answer</div>
+      <div class="col-xs-2"></div>
+      <div class="col-xs-8">
+        <h1>Welcome to the Maths Farm</h1>
+        <p>Down on the farm you can turn a handful of your own questions into some great resources, saving yourself hours.
+        You can save yourself even more time by using the questions already provided by the farm!<p>
+        <p>There are four resourse types you can convert sets of questions into which are:</p>
+        <ul>
+          <li><a href="questions.html">Questions and Answers </a>Simply display your questions on screen with the answers ready to be displayed at a click</li>
+          <li><a href="catch_phrase.html">Catch Phrase </a>A class plenary where pupils need to answer questions to reveal a visual puzzle of your choice</li>
+          <li><a href="phrase_search.html">Find the phrase </a>Hide a hidden message which will amuse your class.  They need to answer the questions to find out what it is</li>
+          <li><a href="bingo.html">Class Bingo </a>Print out numbered bingo cards to help you assess how pupils are getting on in this classic game</li>
+        </ul>
+        <p>
         </div>
-        <div class="row" ng-repeat="qanda in pc.qandas()">
-
-            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-              <button class="btn btn-default btn-block" ng-mouseover="pc.mouseoverQuestion($index)" ng-mouseleave="pc.mouseoutQuestion()">
-                <span class="{{pc.GetEmphasis($index)}}">
-                  {{qanda.question}}
-                </span>
-              </button>
-            </div>
-
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" ng-click="pc.clickResponse($index)">
-              <span ng-show="pc.visible($index)">
-                <button class="btn btn-default btn-block" ng-mouseover="pc.mouseoverQuestion($index)" ng-mouseleave="pc.mouseoutQuestion()">
-                  <span class="{{pc.GetEmphasis($index)}}">
-                    {{qanda.answer}}
-                  </span>
-                </button>
-              </span>
-              <span ng-hide="pc.visible($index)">
-                <button class="btn btn-success btn-block">
-                  <span>Answer {{$index + 1}}</span>
-                </button>
-              </span>
-            </div>
-
-        </div>
-    </div>
+      <div class="col-xs-2"></div>
     </div>
 
   </div>
   <!-- end of question selector -->
-
-  <div class="container">
-
-  </div>
 
   </body>
 </html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="quesion_selector_app">
+  <head>
+    <meta charset="utf-8">
+    <!-- for bootstrap -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="./css/common_styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- end for bootstrap-->
+
+    <!-- for angular -->
+    <script src="./js/angular.min.js"></script>
+    <!-- end for angular -->
+    <!-- for selector -->
+    <script src="./js/question_data.js"></script>
+    <script src="./js/question_selector.js"></script>
+    <!-- end for selector -->
+
+    <title>Maths Farm</title>
+  </head>
+
+  <body>
+    <!-- menu bar at the top -->
+    <questions-nav-directive></questions-nav-directive>
+
+    <!-- start of question selector -->
+    <div class="container">
+      <div>
+
+        <!-- question selection -->
+        <question-selection></question-selection>
+
+        <div ng-controller='PageController as pc'>
+          <div class="row">
+              <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"><h4>Question</h4></div>
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><h4>Answer</h4></div>
+          </div>
+          <div class="row" ng-repeat="qanda in pc.qandas()">
+
+              <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                <button class="btn btn-default btn-block" ng-mouseover="pc.mouseoverQuestion($index)" ng-mouseleave="pc.mouseoutQuestion()">
+                  <span class="{{pc.GetEmphasis($index)}}">
+                    {{qanda.question}}
+                  </span>
+                </button>
+              </div>
+
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" ng-click="pc.clickResponse($index)">
+                <span ng-show="pc.visible($index)">
+                  <button class="btn btn-default btn-block" ng-mouseover="pc.mouseoverQuestion($index)" ng-mouseleave="pc.mouseoutQuestion()">
+                    <span class="{{pc.GetEmphasis($index)}}">
+                      {{qanda.answer}}
+                    </span>
+                  </button>
+                </span>
+                <span ng-hide="pc.visible($index)">
+                  <button class="btn btn-success btn-block">
+                    <span>Answer {{$index + 1}}</span>
+                  </button>
+                </span>
+              </div>
+
+          </div>
+      </div>
+      </div>
+
+    </div>
+    <!-- end of question selector -->
+
+  </body>
+</html>

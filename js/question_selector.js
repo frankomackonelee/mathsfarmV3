@@ -6,15 +6,49 @@
   thisApp.service('sharedProperties', sharedProperties)
   thisApp.controller('QSController', QSController)
   thisApp.controller('PageController', PageController)
-  thisApp.directive('topMenuBar', TopMenuBar);
   thisApp.directive('questionSelection',QuestionSelection)
+
+/*Start of control of the top navbar, common across all pages
+This feels a bit cumberson, the idea is to inject a page name into the html/directive so that the navbar is tailored to the page context...*/
+  thisApp.directive('homeNavDirective', NavDirective("home"));
+  thisApp.directive('contactNavDirective', NavDirective("contact"));
+  thisApp.directive('questionsNavDirective', NavDirective("questions"));
+  thisApp.directive('bingoNavDirective', NavDirective("bingo"));
+  thisApp.directive('phraseSearchNavDirective', NavDirective("phrase_search"));
+  thisApp.directive('catchPhraseNavDirective', NavDirective("catch_phrase"));
+  function NavDirective(page){
+    return function(){
+      var ddo = {
+        templateUrl: './html/top_menu_bar.html',
+        controller: TopNavController(page),
+        controllerAs: 'navCtrl',
+        bindToController: true
+      }
+      return ddo;
+    }
+  }
+
+  function TopNavController(page){
+    return function(){
+      var navCtrl = this;
+
+      navCtrl.activeTab = function(name){
+        if(name == page){
+          return "active";
+        }else{
+          return null;
+        }
+      }
+    }
+  }
 
   /*Provides the html for the top menu bar
   See lecture 26
   */
   function TopMenuBar(){
     var ddo = {
-      templateUrl: './html/top_menu_bar.html'
+      templateUrl: './html/top_menu_bar.html',
+      restrict: 'E'
     }
     return ddo;
   }
@@ -24,6 +58,7 @@
   function QuestionSelection(){
     var ddo = {
       templateUrl: './html/question_selection.html',
+      restrict: 'E'
     }
     return ddo;
   }

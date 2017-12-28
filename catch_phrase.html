@@ -20,9 +20,19 @@
     <!-- end for selector -->
 
     <title>Catch Phrase</title>
+    <style>
+      table {
+        background-size: cover;
+        width: 700px;
+        height: 400px;
+        padding: 20px;
+        margin: auto;
+        border: 1px solid black;
+        }
+    </style>
   </head>
 
-  <body>
+  <body ng-app="quesion_selector_app">
     <!-- menu bar at the top -->
     <catch-phrase-nav-directive></catch-phrase-nav-directive>
 
@@ -31,10 +41,34 @@
 
         <!-- question selection -->
         <question-selection></question-selection>
+        <div class="row">
+          <div class="col-xs-12"><h1>Catch phrase</h1></div>
+        </div>
 
-        <h1>Catch phrase</h1>
+        <div class="row" ng-controller='CatchPhrasePageController as pc'>
+          <div class="col-xs-12" ng-if="pc.qandas().length==0">
+            <h3>Choose Some questions to create the resourse</h3>
+          </div>
+          <div class="col-xs-12" ng-if="!pc.qandas().length==0">
+            <table  id="table1" cellspacing="0" cellpadding="0"
+                    style="background-image: url(&quot;images/1CaughtRedHanded.png&quot;); width:100%">
+              <tbody>
+                  <tr ng-repeat="qanda in pc.qandas()">
+                      <td><div>
+                            <button class="btn btn-success btn-block" ng-click="pc.questionClick($index)" ng-hide="pc.isMissing($index)">{{ qanda.question }}</button>
+                            <button class="btn btn-success btn-block" style="opacity:0.0;" ng-show="pc.isMissing($index)">{{ qanda.question }}</button>
+                          </div></td>
+                      <td><div>
+                            <button class="btn btn-success btn-block" ng-click="pc.answerClick($index)" ng-hide="pc.answerMissing($index)">{{ qanda.answerAtIndex }}</button>
+                            <button class="btn btn-success btn-block" style="opacity:0.0;" ng-show="pc.answerMissing($index)">{{ qanda.answerAtIndex }}</button>
+                          </div></td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
     </div>
-    <!-- end of question selector -->
+    <!-- end  question selector -->
 
   </body>
 </html>

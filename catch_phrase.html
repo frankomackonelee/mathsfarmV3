@@ -56,11 +56,11 @@
                   <tr ng-repeat="qanda in pc.qandas()">
                       <td><div>
                             <button class="btn btn-success btn-block" ng-click="pc.questionClick($index)" ng-hide="pc.isMissing($index)">{{ qanda.question }}</button>
-                            <button class="btn btn-success btn-block" style="opacity:0.0;" ng-show="pc.isMissing($index)">{{ qanda.question }}</button>
+                            <button class="btn btn-success btn-block" style="opacity:0.0; margin-top:0px;" ng-show="pc.isMissing($index)">{{ qanda.question }}</button>
                           </div></td>
                       <td><div>
                             <button class="btn btn-success btn-block" ng-click="pc.answerClick($index)" ng-hide="pc.answerMissing($index)">{{ qanda.answerAtIndex }}</button>
-                            <button class="btn btn-success btn-block" style="opacity:0.0;" ng-show="pc.answerMissing($index)">{{ qanda.answerAtIndex }}</button>
+                            <button class="btn btn-success btn-block" style="opacity:0.0; margin-top:0px;" ng-show="pc.answerMissing($index)">{{ qanda.answerAtIndex }}</button>
                           </div></td>
                   </tr>
               </tbody>

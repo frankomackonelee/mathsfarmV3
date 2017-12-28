@@ -77,7 +77,7 @@ This feels a bit cumberson, the idea is to inject a page name into the html/dire
     qs.selectedTitle = "NotSelected";
 
     qs.writeCookie = function(name,value){
-      document.cookie = name + "=" + value + ";";
+      document.cookie = encodeURI(name + "=" + value + ";");
     }
 
     qs.readCookie = function(name){
@@ -99,7 +99,7 @@ This feels a bit cumberson, the idea is to inject a page name into the html/dire
     }
 
     //TODO: read questions from cookies here:
-    sharedProperties.setqAndAArray([{question:"easy question",answer:"easy answer"},{question:"easy question",answer:"easy answer"},{question:"easy question",answer:"easy answer"},{question:"easy question",answer:"easy answer"},{question:"easy question",answer:"easy answer"},{question:"easy question",answer:"easy answer"},{question:"easy question",answer:"easy answer"},{question:"easy question",answer:"easy answer"},{question:"easy question",answer:"easy answer"},{question:"easy question",answer:"easy answer"},{question:"easy question",answer:"easy answer"},{question:"easy question",answer:"easy answer"},{question:"easy question",answer:"easy answer"},{question:"easy question",answer:"easy answer"},{question:"easy question",answer:"easy answer"},{question:"easy question",answer:"easy answer"},{question:"easy question",answer:"easy answer"},{question:"easy question",answer:"easy answer"}])
+    sharedProperties.setqAndAArray(JSON.parse(qs.readCookie("questions")))
 
     var returnRelevantArray = function(unfilteredObj, selectedValue){
       for(var i = 0; i<unfilteredObj.data.length; i++){
@@ -123,9 +123,6 @@ This feels a bit cumberson, the idea is to inject a page name into the html/dire
       var qandas = returnRelevantArray(titles_and_questions,qs.selectedTitle);
       sharedProperties.setqAndAArray( qandas );
       qs.writeCookie("questions",JSON.stringify(qandas));
-      //TODO: write questions to cookies here:
-      var thisCookie = qs.readCookie("questions");
-
     };
 
   }

@@ -13,16 +13,16 @@
   <!-- pages -->
   <div class="collapse navbar-collapse" id="mainNavBar">
     <ul class="nav navbar-nav">
-      <li class="{{ navCtrl.activeTab('home') }}"><a href="index.html">Home</a></li>
-      <li class="{{ navCtrl.activeTab('contact') }}"><a href="#">Contacts</a></li>
-      <li class="{{ navCtrl.activeTab('choose questions') }}"><a href="#">Choose Questions</a></li>
+      <li class="{{ navCtrl.pageClassStatus('home') }}"><a href="index.html">Home</a></li>
+      <li class="{{ navCtrl.pageClassStatus('contact') }}"><a href="#">Contacts</a></li>
+      <li class="{{ navCtrl.pageClassStatus('choose questions') }}"><a href="#">Choose Questions</a></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li class="{{ navCtrl.activeTab('questions') }}"><a href="questions.html">Questions</a></li>
-          <li class="{{ navCtrl.activeTab('catch_phrase') }}"><a href="catch_phrase.html">Catch Phrase</a></li>
-          <li class="{{ navCtrl.activeTab('bingo') }}"><a href="bingo.html">Bingo</a></li>
-          <li class="{{ navCtrl.activeTab('phrase_search') }}"><a href="phrase_search.html">Find the phrase</a></li>
+          <li class="{{ navCtrl.pageClassStatus('questions') }}"><a href="questions.html">Questions</a></li>
+          <li class="{{ navCtrl.pageClassStatus('catch_phrase') }}"><a href="catch_phrase.html">Catch Phrase</a></li>
+          <li class="{{ navCtrl.pageClassStatus('bingo') }}"><a href="bingo.html">Bingo</a></li>
+          <li class="{{ navCtrl.pageClassStatus('phrase_search') }}"><a href="phrase_search.html">Find the phrase</a></li>
         </ul>
       </li>
     </ul>

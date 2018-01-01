@@ -9,40 +9,33 @@
   thisApp.controller('CatchPhrasePageController', CatchPhrasePageController)
   thisApp.directive('questionSelection',QuestionSelection)
 
-/*Start of control of the top navbar, common across all pages
-This feels a bit cumberson, the idea is to inject a page name into the html/directive so that the navbar is tailored to the page context...*/
-  thisApp.directive('homeNavDirective', NavDirective("home"));
-  thisApp.directive('contactNavDirective', NavDirective("contact"));
-  thisApp.directive('questionsNavDirective', NavDirective("questions"));
-  thisApp.directive('bingoNavDirective', NavDirective("bingo"));
-  thisApp.directive('phraseSearchNavDirective', NavDirective("phrase_search"));
-  thisApp.directive('catchPhraseNavDirective', NavDirective("catch_phrase"));
+/*Start of control of the top navbar, common to multiple all pages...*/
+  thisApp.directive('navDirective', NavDirective);
 
-  function NavDirective(page){
-    return function(){
+  function NavDirective(){
       var ddo = {
         templateUrl: './html/top_menu_bar.html',
-        controller: TopNavController(page),
+        controller: TopNavController,
         controllerAs: 'navCtrl',
-        bindToController: true
+        bindToController: true,
+        scope:{
+          currentpage: '@currentpage'
+        }
       }
       return ddo;
-    }
   }
 
-  function TopNavController(page){
-    return function(){
+  function TopNavController(){
       var navCtrl = this;
-
-      navCtrl.activeTab = function(name){
-        if(name == page){
+      navCtrl.pageClassStatus = function(name){
+        if(name == navCtrl.currentpage){
           return "active";
         }else{
           return null;
         }
       }
-    }
   }
+  /*End of control of the top navbar*/
 
   /*Provides the html for the dropdown selectors
   */

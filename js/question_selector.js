@@ -51,8 +51,6 @@
   This will talk to the APIs to access quesiton titles and quesitons etc, and manage the display of these
   EXCEPT the question titles which it passes to the sharedProperties service to be displayed differently
   on each page.
-  TODO: make this a point to read out of cookies the questions which are available...
-  TODO: involves writing a read to cookies function.
   */
   QSController.$inject = ['sharedProperties']
   function QSController(sharedProperties){
@@ -88,11 +86,18 @@
       }
       //TODO: here is where to get the default questions in:
       //Note if you change this, need to adjust where this is read too below...
-      return "";
+      var result = '['
+        for(var i = 0; i<18; i++){
+          result = result += '{"question":"Example question ' +  i + '","answer":"Answer ' +  i + '"},'
+        }
+      result = result.substring(0,result.length - 1);
+      result = result + ']';
+      return result;
     }
 
     //TODO: read questions from cookies here:
-    sharedProperties.setqAndAArray(JSON.parse(qs.readCookie("questions")))
+    var obj = JSON.parse(qs.readCookie("questions"));
+    sharedProperties.setqAndAArray(obj);
 
     var returnRelevantArray = function(unfilteredObj, selectedValue){
       for(var i = 0; i<unfilteredObj.data.length; i++){
